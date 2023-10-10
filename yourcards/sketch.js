@@ -20,21 +20,26 @@ function createCards() {
                 suit: s,
                 turn: false,//false --> show back, true -->show card image
             };  
-			cards.push(card);
+			cards.push(card);//push card into cards (array)
 		}
 	}
-	return cards;
+    return cards;
 }
 
 //shuffering an array in a random order for swapping 54 cards
 function shuffleCards(array){
 	let i,j,temp = 0;
 	for (i = array.length - 1; i > 0; i--) {  
-		// Generate random number  
+		// Generate random number j between 0 to i-1 
 		j = Math.floor(Math.random() * (i + 1)); 
-		temp = array[i]; 
-		array[i] = array[j]; 
-		array[j] = temp; 
+		
+    //swap 2 elements of array using DESTRUCTURING 
+    [array[i],array[j]]=[array[j],array[i]];
+        
+    //Old method to swap 2 elements of array using temp variable
+    //temp = array[i]; 
+		//array[i] = array[j]; 
+		//array[j] = temp; 
 	} 
 	return array; 
 } 
@@ -77,10 +82,12 @@ function next(){
 
 //Turn all your cards by click button
 function turnAllYourCards() {
-  //Using forEach replace For
-  yourCards.forEach((card) => card.turn = !(card.turn))
+  //Using array.forEach to replace For
+  ///// Using only Current Element in Foreach
+  ///// array.forEach(function(currentElement) { /* ... */ })
+  yourCards.forEach(function(card) {card.turn = !(card.turn)});
   
-  /////
+  ///// Using For
   //for (let i=0;i<numberOfCards;i++){
   //    yourCards[i].turn = !(yourCards[i].turn);
   //}
@@ -107,12 +114,12 @@ function showYourCards(){
 
 function setup() {
   createCanvas(2*leftMargin+numberOfCards*cardW+(numberOfCards-1)*gap,2*topMargin+cardH);
-  background("white");
+  background("lightgray");
   button1 = createButton('Turn all your cards');
   button1.position(width/2-60, topMargin/3);
   button1.mousePressed(turnAllYourCards);
   para3 = createElement('p',"");
-  para3.position(leftMargin, height-20);
+  para3.position(leftMargin, height-topMargin);
   button2 = createButton('Next '+numberOfCards+' cards >>');
   button2.position(width/2-55, height-topMargin+15);
   button2.mousePressed(next);
@@ -120,7 +127,7 @@ function setup() {
 
 function draw() {
   showYourCards();
-  para3.html("Number of Shuffed cards: " + randomCards.length);
+  para3.html("Remaining cards: " + randomCards.length);
   if (randomCards.length<numberOfCards){
     button2.attribute('disabled', '');
   }
