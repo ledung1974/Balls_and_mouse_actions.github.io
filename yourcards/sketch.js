@@ -77,14 +77,14 @@ function next(){
 
 //Turn all your cards by click button
 function turnAllYourCards() {
-  for (let i=0;i<numberOfCards;i++){
-     if (yourCards[i].turn){
-        yourCards[i].turn = false;
-     }
-     else{
-        yourCards[i].turn = true;
-     }
-  }
+  //Using forEach replace For
+  yourCards.forEach((card) => card.turn = !(card.turn))
+  
+  /////
+  //for (let i=0;i<numberOfCards;i++){
+  //    yourCards[i].turn = !(yourCards[i].turn);
+  //}
+  
 }
 
 //Turn all your cards by pressing Spacebar key
