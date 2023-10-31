@@ -1,6 +1,7 @@
 const gap = 4;
+const deltaColor = 30;
 let currentArray = [];
-let currentSizeArray = 4
+let currentSizeArray = 5
 let currentColor0 = [];
 let currentColor1 = [];
 
@@ -41,14 +42,26 @@ function drawBoard (x,y,w,c0,c1,array2D){
 
 function setup() {
   createCanvas(400, 400);
-  currentArray = randomOneSquare(create2DZeroSquareArray(currentSizeArray));  
+  //Create a square 2D Array with only one item = 1, all others = zero
+  currentArray = randomOneSquare(create2DZeroSquareArray(currentSizeArray));
+  
+  //Create a ramdom color(r, g, b) to set color0 
+  let r = Math.floor(random()*255);
+  let g = Math.floor(random()*255);
+  let b = Math.floor(random()*255);
+  currentColor0 = color(r,g,b);
+  //then make color1 from color0 with deltaColor
+  let r1 = r;
+  if (r>deltaColor){ 
+     r1 -= deltaColor;
+  }else{
+     r1 += deltaColor; 
+  }
+  currentColor1 = color(r1,g,b);
 }
 
 
 function draw() {
-  background(220);
-  currentColor0 = color(240,150,150);
-  currentColor1 = color(200,150,150);
-  
+  background(255);
   drawBoard (4,4,380,currentColor0,currentColor1,currentArray); 
 }
