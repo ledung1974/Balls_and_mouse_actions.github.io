@@ -1,9 +1,26 @@
 const gap = 4;
-const deltaColor = 30;
+
 let currentArray = [];
 let currentSizeArray = 5
+
 let currentColor0 = [];
 let currentColor1 = [];
+const deltaColor = 48;
+function randomColor(){
+   //Using colorMode is HSB (HUE, SATURATION, BRIGHTNESS)
+   let h = Math.floor(random()*360);//The h(ue) parameter takes random value from 0 to 360
+   let s = Math.floor(random()*100);//The s(aturation) parameter random takes value from 0 to 100
+   let b = Math.floor(random()*255);//The b(rightness) parameter random takes value from 0 to 100
+   currentColor0 = color(h,s,b);
+   //then make color1 from color0 with deltaColor
+   let b1 = b;
+   if (b>deltaColor){ 
+      b1 -= deltaColor;
+   }else{
+      b1 += deltaColor; 
+   }
+   currentColor1 = color(h,s,b1);
+}
 
 function create2DZeroSquareArray(n){
   return Array.from(Array(n), () => new Array(n).fill(0));
@@ -20,6 +37,7 @@ function randomOneSquare(array2D){
 
 function drawBoard (x,y,w,c0,c1,array2D){
    len = array2D.length;
+   colorMode(HSB);
    noStroke();
    w1 = (w - (len-1)*gap)/len; 
    let y1 = y;
@@ -45,19 +63,8 @@ function setup() {
   //Create a square 2D Array with only one item = 1, all others = zero
   currentArray = randomOneSquare(create2DZeroSquareArray(currentSizeArray));
   
-  //Create a ramdom color(r, g, b) to set color0 
-  let r = Math.floor(random()*255);
-  let g = Math.floor(random()*255);
-  let b = Math.floor(random()*255);
-  currentColor0 = color(r,g,b);
-  //then make color1 from color0 with deltaColor
-  let r1 = r;
-  if (r>deltaColor){ 
-     r1 -= deltaColor;
-  }else{
-     r1 += deltaColor; 
-  }
-  currentColor1 = color(r1,g,b);
+  //Create a ramdom color(HUE, SATURATION, BRIGHTNESS) for color0 and color1 
+  randomColor();
 }
 
 
