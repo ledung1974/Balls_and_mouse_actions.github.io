@@ -1,24 +1,24 @@
 const gap = 4;
 const margin = 10;
 const canvasSize = 400;
-
+//2D Levels Array of [sizeArray,deltaColor] 
 const levels = [ [2,64],[2,62],[2,60],
                  [3,58],[3,54],[3,52],
                  [4,48],[4,44],[4,42],[4,40],
                  [5,38],[5,36],[5,34],[5,32],[5,30],
                  [6,29],[6,28],[6,27],[6,26],[6,25],[6,24],[6,23],[6,22],[6,21],[6,20]
-               ] //2D array
+               ] 
 
 let currentLevel = 0;
 let currentSizeArray = 2;
 let currentDeltaColor = 64;
-let currentArray = [];//2D array
+let currentArray = [];//2D array of the square items 
 
 let gameStart = false;
 let clickEnable = false;
 
-let currentColor0 = [];
-let currentColor1 = [];
+let currentColor0 = [];//Ramdom color for the square item
+let currentColor1 = [];//Different color for only one square item
 function randomColor(){
   colorMode(RGB); 
   let r = Math.floor(random()*255);//The r(ed) takes random value from 0 to 255
@@ -39,10 +39,12 @@ function randomColor(){
   print(currentColor1.levels);
 }
 
+//Initial a zero 2D square array size = n
 function create2DZeroSquareArray(n){
   return Array.from(Array(n), () => new Array(n).fill(0));
 }
 
+//Make a random item = 1 in the zero 2D square array
 function randomOneSquare(array2D){
   len = array2D.length;
   let i = Math.floor(random()*len);
@@ -52,12 +54,12 @@ function randomOneSquare(array2D){
   return array2D;
 }
 
-//Draw the game board
+//Draw the game square board at x,y with size = w and 2 colors base on 2D square array
 function drawBoard (x,y,w,c0,c1,array2D){
-   len = array2D.length;
+   let len = array2D.length;
    colorMode(RGB);
    noStroke();
-   w1 = (w - (len-1)*gap)/len; 
+   let w1 = (w - (len-1)*gap)/len; 
    let y1 = y;
    for (let i = 0; i < len; i++) { 
       let x1 = x;
@@ -73,7 +75,6 @@ function drawBoard (x,y,w,c0,c1,array2D){
       }
       y1 += (w1+gap);  
    }
-   
 }
 
 //Checking Mouse on Square Items
