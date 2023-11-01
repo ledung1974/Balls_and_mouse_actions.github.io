@@ -2,15 +2,23 @@ const gap = 4;
 const margin = 10;
 const canvasSize = 400;
 
+const levels = [ [2,64],[2,62],[2,60],
+                 [3,58],[3,54],[3,52],
+                 [4,48],[4,44],[4,42],[4,40],
+                 [5,38],[5,36],[5,34],[5,32],[5,30],
+                 [6,29],[6,28],[6,27],[6,26],[6,25],[6,24],[6,23],[6,22],[6,21],[6,20]
+               ] //2D array
+
 let currentLevel = 0;
-let currentArray = [];
-let currentSizeArray = 5
+let currentSizeArray = 2;
+let currentDeltaColor = 64;
+let currentArray = [];//2D array
+
 let gameStart = false;
 let clickEnable = false;
 
 let currentColor0 = [];
 let currentColor1 = [];
-const deltaColor = 32;
 function randomColor(){
   colorMode(RGB); 
   let r = Math.floor(random()*255);//The r(ed) takes random value from 0 to 255
@@ -18,13 +26,13 @@ function randomColor(){
   let b = Math.floor(random()*255);//The b(lue) takes random value from 0 to 255
   currentColor0 = color(r,g,b);
   
-  //then make color1 from color0 with deltaColor +/- to random Red or Green or Blue
+  //then make color1 from color0 with currentDeltaColor +/- to random Red or Green or Blue
   let cTemp = [r,g,b]; 
   let i = Math.floor(random()*3);
-  if (cTemp[i]>deltaColor){ 
-      cTemp[i] -= deltaColor;
+  if (cTemp[i]>currentDeltaColor){ 
+      cTemp[i] -= currentDeltaColor;
   }else{
-      cTemp[i] += deltaColor; 
+      cTemp[i] += currentDeltaColor; 
   }
   currentColor1 = color(cTemp[0],cTemp[1],cTemp[2]);
   print(currentColor0.levels);
@@ -89,6 +97,10 @@ function mouseClicked() {
       let pixelColor = get(mouseX, mouseY);
       if (JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)){
            currentLevel += 1;
+           if (currentLevel < levels.length){
+              currentSizeArray = levels[currentLevel][0];
+              currentDeltaColor = levels[currentLevel][1];
+           }
            currentArray = randomOneSquare(create2DZeroSquareArray(currentSizeArray));
            randomColor();
       }
@@ -106,6 +118,8 @@ function setup() {
   para1 = createElement('p', "");
   para1.position(width/3+20,height - 100);
   
+  currentSizeArray = levels[currentLevel][0];
+  currentDeltaColor = levels[currentLevel][1];
   //Create a square 2D Array with only one item = 1, all others = zero
   currentArray = randomOneSquare(create2DZeroSquareArray(currentSizeArray));
   
@@ -114,7 +128,6 @@ function setup() {
   
   gameStart = true;
 }
-
 
 function draw() {
   background(255);
