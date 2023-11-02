@@ -111,6 +111,25 @@ function mouseClicked() {
   }
 }
 
+function touchStarted() {
+  if (clickEnable){    
+    let pixelColor = get(mouseX, mouseY);
+    if (JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)){
+         currentLevel += 1;
+         if (currentLevel < levels.length){
+            currentSizeArray = levels[currentLevel][0];
+            currentDeltaColor = levels[currentLevel][1];
+         }
+         currentArray = randomOneSquare(create2DZeroSquareArray(currentSizeArray));
+         randomColor();
+    }
+    else{
+         gameStart = false;
+    }
+}
+
+}
+
 ///////////////////////////////////////////
 function setup() {
   createCanvas(canvasSize, canvasSize+100);
