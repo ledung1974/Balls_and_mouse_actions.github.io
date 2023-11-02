@@ -113,7 +113,7 @@ function mouseClicked() {
 
 //When run on touch screen as Iphone
 function touchStarted() {      
-    let pixelColor = get(mouseX, mouseY);
+   let pixelColor = get(mouseX, mouseY);
     if (JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)){
          currentLevel += 1;
          if (currentLevel < levels.length){
@@ -129,7 +129,11 @@ function touchStarted() {
       }   
       
     }
+    return false;
 }
+function mousePressed() {
+   return false;
+}    
 
 ///////////////////////////////////////////
 function setup() {
