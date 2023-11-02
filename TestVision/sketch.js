@@ -124,7 +124,10 @@ function touchStarted() {
          randomColor();
     }
     else{
+      if (JSON.stringify(pixelColor) === JSON.stringify(currentColor0.levels)){
          gameStart = false;
+      }   
+      
     }
 
 
