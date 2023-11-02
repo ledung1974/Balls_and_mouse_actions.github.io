@@ -112,7 +112,7 @@ function mouseClicked() {
 }
 
 function touchStarted() {
-  if (clickEnable){    
+      
     let pixelColor = get(mouseX, mouseY);
     if (JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)){
          currentLevel += 1;
@@ -126,7 +126,7 @@ function touchStarted() {
     else{
          gameStart = false;
     }
-}
+
 
 }
 
