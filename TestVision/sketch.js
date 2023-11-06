@@ -1,6 +1,6 @@
 const gap = 4;
 const margin = 10;
-let  canvasSize = 400;
+let  canvasSize = 600;
 //2D Levels Array of [sizeArray,deltaColor] 
 const levels = [ [2,64],[2,62],[2,60],
                  [3,58],[3,54],[3,52],
@@ -137,8 +137,8 @@ function mousePressed() {
 
 ///////////////////////////////////////////
 function setup() {
-  if (windowWidth<1200)
-     {canvasSize = 800;
+  if (windowWidth<windowHeight)
+     {canvasSize = windowWidth;
   }
   createCanvas(canvasSize, canvasSize+100);
   para0 = createElement('p', "");
