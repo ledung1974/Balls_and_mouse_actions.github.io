@@ -129,7 +129,7 @@ function touchStarted() {
       }   
       
     }
-    return false;
+    return true;
 }
 function mousePressed() {
    return false;
