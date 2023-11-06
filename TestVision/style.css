@@ -9,10 +9,3 @@ p {
   font-size:32px;
 }
 
-/* On screens that are 600px or less, set the background color to olive */
-@media screen and (max-width: 1200px) {
-  body {
-    background-color: olive;
-    zoom: 200%;
-  }
-}
