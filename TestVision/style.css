@@ -2,10 +2,16 @@ html, body {
   margin: 0;
   padding: 0;
 }
+h1 {
+  text-align: center;
+}
 canvas {
   display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 p {
   font-size:32px;
+  text-align: center;
 }
 

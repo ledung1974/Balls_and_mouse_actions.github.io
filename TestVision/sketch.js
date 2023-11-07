@@ -55,10 +55,10 @@ function randomOneSquare(array2D){
 }
 
 //Draw the game square board at x,y with size = w and 2 colors base on 2D square array
-function drawBoard (x,y,w,c0,c1,array2D){
+function drawBoard (x,y,w,c0,c1,array2D,showAnswer){
+   background(255);
    let len = array2D.length;
    colorMode(RGB);
-   noStroke();
    let w1 = (w - (len-1)*gap)/len; 
    let y1 = y;
    for (let i = 0; i < len; i++) { 
@@ -66,9 +66,13 @@ function drawBoard (x,y,w,c0,c1,array2D){
       for (let j = 0; j < len; j++){
          if (array2D[i][j] == 0){
             fill(c0);//color0 for item = 0
+            noStroke();
          }
          else{
             fill(c1);//color1 for item = 1
+            if (showAnswer){//showAnswer = true when Game Over
+               stroke(0);//Show black boder of the different square when game over 
+            }
          }
          square(x1, y1, w1, gap);
          x1 += (w1+gap);
@@ -79,22 +83,24 @@ function drawBoard (x,y,w,c0,c1,array2D){
 
 //Checking Mouse on Square Items
 function mouseMoved(){ 
-  let pixelColor = get(mouseX, mouseY);
-  //Must use JSON.stringify() to compare 2 arrays
-  if (JSON.stringify(pixelColor) === JSON.stringify(currentColor0.levels) ||
-      JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)
-     ){
-     cursor(HAND);
-     clickEnable = true;
-  }else{
-     cursor(ARROW);
-     clickEnable = false;
-  }
+  if (gameStart){
+     let pixelColor = get(mouseX, mouseY);
+     //Must use JSON.stringify() to compare 2 arrays
+     if  (JSON.stringify(pixelColor) === JSON.stringify(currentColor0.levels) ||
+          JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)
+         ){
+            cursor(HAND);
+            clickEnable = true;
+     }else{
+            cursor(ARROW);
+            clickEnable = false;
+     }
+   }
 }
 
 //Checking mouse click right (different-color) square item or not 
 function mouseClicked() {
-  if (clickEnable){    
+  if (gameStart & clickEnable){    
       let pixelColor = get(mouseX, mouseY);
       if (JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)){
            currentLevel += 1;
@@ -106,6 +112,7 @@ function mouseClicked() {
            randomColor();
       }
       else{
+           cursor(ARROW);
            gameStart = false;
       }
   }
@@ -113,23 +120,25 @@ function mouseClicked() {
 
 //When run on touch screen as Iphone
 function touchStarted() {      
-   let pixelColor = get(mouseX, mouseY);
-    if (JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)){
-         currentLevel += 1;
-         if (currentLevel < levels.length){
-            currentSizeArray = levels[currentLevel][0];
-            currentDeltaColor = levels[currentLevel][1];
-         }
-         currentArray = randomOneSquare(create2DZeroSquareArray(currentSizeArray));
-         randomColor();
-    }
-    else{
-      if (JSON.stringify(pixelColor) === JSON.stringify(currentColor0.levels)){
-         gameStart = false;
-      }   
-      
-    }
-    return true;
+   if (gameStart){
+      let pixelColor = get(mouseX, mouseY);
+      if (JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)){
+            currentLevel += 1;
+            if (currentLevel < levels.length){
+               currentSizeArray = levels[currentLevel][0];
+               currentDeltaColor = levels[currentLevel][1];
+            }
+            currentArray = randomOneSquare(create2DZeroSquareArray(currentSizeArray));
+            randomColor();
+       }
+       else{
+         if (JSON.stringify(pixelColor) === JSON.stringify(currentColor0.levels)){
+            gameStart = false;
+         }   
+         
+       }
+       return true;
+   }  
 }
 function mousePressed() {
    return false;
@@ -143,12 +152,9 @@ function setup() {
   else{
      canvasSize = 400;
   }
-  createCanvas(canvasSize, canvasSize+100);
-  para0 = createElement('p', "");
-  para0.position(width/3+8,height/3);
-  para1 = createElement('p', "");
-  para1.position(width/3+20,height - 100);
   
+  createCanvas(canvasSize, canvasSize);
+  para1 = createElement('p', "");
   currentSizeArray = levels[currentLevel][0];
   currentDeltaColor = levels[currentLevel][1];
   //Create a square 2D Array with only one item = 1, all others = zero
@@ -160,13 +166,13 @@ function setup() {
   gameStart = true;
 }
 
-function draw() {
-  background(255);
-  if (gameStart){    
-    drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray);
+function draw() {  
+  if (gameStart){       
+    drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray,false);
     para1.html("Level: "+currentLevel);
   }else{
-    para0.html("Game Over!");
+    drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray,true);
+    para1.html("Game over at level "+currentLevel);
   }
   
 }
