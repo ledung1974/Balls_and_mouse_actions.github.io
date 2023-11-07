@@ -71,6 +71,7 @@ function drawBoard (x,y,w,c0,c1,array2D,showAnswer){
          else{
             fill(c1);//color1 for item = 1
             if (showAnswer){//showAnswer = true when Game Over
+               strokeWeight(2*gap);
                stroke(0);//Show black boder of the different square when game over 
             }
          }

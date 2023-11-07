@@ -4,6 +4,7 @@ html, body {
 }
 h1 {
   text-align: center;
+  font-size:3.5vh;
 }
 canvas {
   display: block;
@@ -11,7 +12,7 @@ canvas {
   margin-right: auto;
 }
 p {
-  font-size:32px;
+  font-size:4vh;
   text-align: center;
 }
 
