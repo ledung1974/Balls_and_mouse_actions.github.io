@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Clone</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <h1>Can you guess the <span id="help-span">WORD</span>?</h1>
+    <hr/>
+
+    <div id="words-board">
+        <div class="word-row">
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+        </div>
+        <div class="word-row">
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+        </div>
+        <div class="word-row">
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+        </div>
+        <div class="word-row">
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+        </div>
+        <div class="word-row">
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+        </div>
+        <div class="word-row">
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+        </div>
+    </div>
+
+    <div id="keyboard-container">
+        <div class="first-row">
+            <button class="keyboard-button">q</button>
+            <button class="keyboard-button">w</button>
+            <button class="keyboard-button">e</button>
+            <button class="keyboard-button">r</button>
+            <button class="keyboard-button">t</button>
+            <button class="keyboard-button">y</button>
+            <button class="keyboard-button">u</button>
+            <button class="keyboard-button">i</button>
+            <button class="keyboard-button">o</button>
+            <button class="keyboard-button">p</button>
+        </div>
+        <div class="second-row">
+            <button class="keyboard-button">a</button>
+            <button class="keyboard-button">s</button>
+            <button class="keyboard-button">d</button>
+            <button class="keyboard-button">f</button>
+            <button class="keyboard-button">g</button>
+            <button class="keyboard-button">h</button>
+            <button class="keyboard-button">j</button>
+            <button class="keyboard-button">k</button>
+            <button class="keyboard-button">l</button>
+        </div>
+        <div class="third-row">
+            <button id="enter-button" class="keyboard-button">Enter</button>
+            <button class="keyboard-button">z</button>
+            <button class="keyboard-button">x</button>
+            <button class="keyboard-button">c</button>
+            <button class="keyboard-button">v</button>
+            <button class="keyboard-button">b</button>
+            <button class="keyboard-button">n</button>
+            <button class="keyboard-button">m</button>
+            <button id="delete-button" class="keyboard-button">Del</button>
+        </div>
+    </div>
+    
+    <!-- Help content will be showed as Modal Box when click WORD in header -->
+    <div id="helpBox" class="modal">
+        <div class="modal-content">
+                <span id="modal-close">&times;</span>
+                <h1 id="modal-header">How To Play</h1>
+                <p>You have 6 attempts to guess the mystery word with 5 letters.
+                   After each guess (press Enter), the color of each letter in the guess word will change to show how close your guess was.</p>
+                <li>Green is a letter that is in the mystery word and in correct spot.</li>
+                <li>Yellow is a letter that is in the mystery word but in wrong spot.</li>
+                <li>Gray is a letter that is not in the mystery word in any spot.</li>
+        </div>
+    </div>
+    
+    <!-- Modal Box alert "Word not in list!" -->
+    <div id="wordNotInListBox" class="modal">
+        <div class="modal-alert">
+            <h1 class="alert">Word not in list!</h1>
+        </div>
+    </div>
+
+    <!-- Modal Box show result -->
+    <div id="resultBox" class="modal">
+        <div class="modal-result">
+                <h1 id="modal-result-header">Game Over!</h1>
+                <p class="modal-p-result">The mystery word is <span id="word-result"></span></p>
+                <button id="next-word">NEXT WORD</button>
+        </div>
+    </div>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>

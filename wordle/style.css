@@ -1,0 +1,201 @@
+:root {
+  --green: rgb(95, 192, 95);
+  --yellow: rgb(204, 204, 63);
+  --gray:rgb(128, 128, 128);
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  width: 100%;
+  background-color: white;
+  height: 100vh;
+}
+
+h1 {
+ text-align: center;
+ font-size: 1.8rem;
+ padding: 10px;
+}
+
+#help-span{
+  color: var(--green);
+}
+
+#help-span:hover{
+  cursor:pointer;
+}
+
+#words-board {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.letter-box {
+  border: 1px solid rgb(201, 201, 201);
+  margin: 2px;
+  font-size: 2.2rem;
+  font-weight: 500;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  transition: transform 0.8s;
+}
+
+.filled-box {
+  border: 1px solid black;
+}
+
+.word-row {
+  display: flex;
+}
+
+#keyboard-container {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#keyboard-container div {
+  display: flex;
+}
+
+.second-row {
+  margin: 0.5rem 0;
+}
+
+.keyboard-button {
+  font-size: 1.5rem;
+  width:2.5rem;
+  border-radius: 5px;
+  border-width: 0px;
+  font-weight: 500;
+  padding: 0.5rem;
+  margin: 0 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+#enter-button{
+  font-size: 1rem;
+  width:5rem;
+  background-color: var(--green);
+  color: white;
+}
+#delete-button{
+  font-size: 1rem;
+  width:5rem;
+  background-color: #c6095e;
+  color:white;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* The Modal-Header*/
+#modal-header{
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+/* The Modal-Close Button */
+#modal-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#modal-close:hover,
+#modal-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  margin-top:24rem;
+  padding:5px 20px;
+  border: 1px solid #888;
+  width:30rem;
+}
+.modal-content > p, li {
+  padding: 5px;
+}
+
+.modal-alert{
+  background-color:rgba(245, 192, 192, 0.5);
+  margin: auto;
+  margin-top: 200px;
+  padding:5px 10px;
+  border: 0px solid #888;
+  width:20rem;
+}
+
+.alert{
+  text-align: center;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.modal-result {
+  background-color: #fefefe;
+  margin: auto;
+  margin-top: 400px;
+  padding:5px 20px;
+  border: 1px solid #888;
+  width:30rem;
+  height:10rem;
+}
+#modal-result-header{
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 5px;
+}
+
+.modal-p-result{
+  text-align: center;
+  font-size: 1rem;
+  padding: 15px;
+}
+#word-result{
+  text-transform: uppercase;
+  color:var(--green);
+  font-size: 1.2rem;
+}
+
+#next-word{
+  display: block;
+  font-size: 1.2rem;
+  padding:10px 10px;
+  margin:0 auto;
+  background-color: var(--green);
+  border-radius: 5px;
+  color:white;
+}

@@ -5,3 +5,4 @@
   
 #Not using P5JS
  - [Run Playing cards](/playingcard/index.html)
+ - [Run Wordle](/wordle/index.html)
