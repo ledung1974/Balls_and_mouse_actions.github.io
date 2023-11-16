@@ -150,7 +150,7 @@ h1 {
 }
 
 .modal-alert{
-  background-color:rgba(244, 126, 126, 0.5);
+  background-color:rgba(140, 2, 2, 0.8);
   margin: auto;
   margin-top: 200px;
   padding:5px 10px;
@@ -163,12 +163,13 @@ h1 {
   font-size: 1.8rem;
   font-weight: 400;
   padding: 5px;
+  color:white;
 }
 
 .modal-result {
   background-color: #fefefe;
   margin: auto;
-  margin-top:30rem;
+  margin-top:29rem;
   padding:5px 20px;
   border: 1px solid #888;
   width:25rem;
