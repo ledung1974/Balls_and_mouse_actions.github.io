@@ -15,13 +15,13 @@
 body{
   width: 100%;
   background-color: white;
-  height: 100vh;
+  height: 100%;
 }
 
 h1 {
  text-align: center;
  font-size: 1.6rem;
- padding: 15px 5px;
+ padding: 10px 5px;
 }
 
 #help-span{
@@ -36,7 +36,7 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 20px 5px;
+  padding: 15px 5px;
 }
 
 .letter-box {
@@ -62,7 +62,7 @@ h1 {
 }
 
 #keyboard-container {
-  margin: 1rem 0;
+  padding:10px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,7 +73,7 @@ h1 {
 }
 
 .second-row {
-  margin: 0.8rem 0;
+  padding:10px 5px;
 }
 
 .keyboard-button {
