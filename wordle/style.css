@@ -16,6 +16,7 @@ body{
   width: 100%;
   background-color: white;
   height: 100%;
+  touch-action: manipulation;
 }
 
 h1 {
