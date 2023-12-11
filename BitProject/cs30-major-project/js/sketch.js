@@ -63,8 +63,9 @@ function scrollingDownBackground() {
 function makeBalloons() {
   balloons = new Sprite();
   balloons.x = width / 2;
-  balloons.y = (4 * height) / 5;
-  balloons.diameter = 150;
+  balloons.y = height-150;
+  balloons.width = 140;
+  balloons.height = 275;
   balloons.img = "assets/balloons.png";
   balloons.collider = "static";
 }
