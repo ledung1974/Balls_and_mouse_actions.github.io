@@ -153,7 +153,7 @@ function removeOffScreenObstaclesAndCheckCollision(groupObs, index) {
 //Process when there is a collision
 function checkCollision(obstacle) {
   if (obstacle.collides(balloons)) {
-    console.log("Game over !");
+    soundtrack.stop(1);
     gameStarted = false;
     balloons.img = "assets/boom.png";
     //Show GameOver Dialog
