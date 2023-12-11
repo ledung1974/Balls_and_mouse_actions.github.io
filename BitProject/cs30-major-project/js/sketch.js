@@ -83,7 +83,7 @@ function makeBird() {
 }
 
 ///Make a Group (p5play) of Obstacles (p5play Sprites) then push to obstaclesArray
-//typeOfSprites = "Squares" or "Dots" or "Rectangles"
+//typeOfSprites = "Squares" or "Dots" or "Rectangles" or "Pigs" or "Airplane"
 function makeGroupOfObstacles(amount, typeOfSprites) {
   groupObs = new Group();
   groupObs.y = 10;
@@ -95,12 +95,16 @@ function makeGroupOfObstacles(amount, typeOfSprites) {
       obs.height = obs.width;
       obs.rotationSpeed = 5;
       obs.x = random(0, width);
+      obs.textSize = 18;
+      obs.text = gameLevel;
     }
     if (typeOfSprites == "Dots") {
       obs.diameter = random(20, 80);
       obs.x = random(0, width);
       obs.speed = 3;
       obs.direction = random(0,180);
+      obs.textSize = 18;
+      obs.text = gameLevel;
     }
     if (typeOfSprites == "Rectangles") {
       obs.width = random(20, 80);
@@ -108,15 +112,25 @@ function makeGroupOfObstacles(amount, typeOfSprites) {
       obs.x = width / 2;
       obs.y = random(0, 30);
       obs.rotationSpeed = 1;
-      obs.textSize = 24;
+      obs.textSize = 18;
       obs.text = gameLevel;
     }
     if (typeOfSprites == "Pigs") {
-      obs.diameter = 60;
+      obs.scale = random(0.3,1.1);
       obs.img = "assets/pig.png";
       obs.x = random(0, width);
       obs.moveTowards(balloons, 0.01);
-      obs.speed = 1;
+      obs.speed = obs.scale;
+    }
+    if (typeOfSprites == "Airplane") {
+      obs.scale = random(0.5,1.1);
+      obs.collider = "kinematic";
+      obs.img = "assets/airplane.png";
+      obs.x = 0;
+      obs.y = random(5,height/3);
+      obs.moveTowards(balloons, 0.01);
+      obs.direction = -10;
+      obs.speed = 10*obs.scale;
     }
   }
   obstaclesArray.push(groupObs);
@@ -176,15 +190,17 @@ function checkCollision(obstacle) {
 }
 
 function createGroupOfObstacles() {
-  if (frameCount - lastGemTime > 4 * 60) {
-    if (frameCount % 4 === 0) {
+  if (frameCount - lastGemTime > 5 * 60) {
+    if (frameCount % 5 === 0) {
       makeGroupOfObstacles(gameLevel * 2, "Squares");
-    } else if (frameCount % 4 === 1) {
-      makeGroupOfObstacles(gameLevel * 2, "Rectangles");
-    } else if (frameCount % 4 === 2) {
+    } else if (frameCount % 5 === 1) {
       makeGroupOfObstacles(gameLevel * 2, "Dots");
-    } else {
+    } else if (frameCount % 5 === 2) {
+      makeGroupOfObstacles(gameLevel * 2, "Rectangles");
+    } else if (frameCount % 5 === 3) {
       makeGroupOfObstacles(gameLevel * 2, "Pigs");
+    } else {
+      makeGroupOfObstacles(1, "Airplane");
     }
     lastGemTime = frameCount;
   }
