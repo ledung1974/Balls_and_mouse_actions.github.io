@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Bit Game</title>
-	<link rel="stylesheet" href="/BitProject/cs30-major-project/css/style.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rise Up game</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<body>
-	<script src="/BitProject/cs30-major-project/libraries/p5.js"></script>
-	<!-- <script src="/BitProject/cs30-major-project/libraries/p5.sound.min.js"></script> -->
-    <script src="/BitProject/cs30-major-project/libraries/planck.min.js"></script>   
-	<script src="/BitProject/cs30-major-project/libraries/p5play.js"></script>
-	<script src="/BitProject/cs30-major-project/js/sketch.js"></script>
-</body>
+  <body>
+    <script src="libraries/p5.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="libraries/planck.min.js"></script>
+    <script src="libraries/p5play.js"></script>
+    <script src="js/sketch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
 
+    <!-- Start Dialog with Help content and Start button -->
+    <div id="start-dialog" class="modal">
+      <div class="modal-content">
+        <h1 class="modal-header">How to Play</h1>
+        <p>You have to control your mouse .....</p>
+        <li>to ........</li>
+        <li>to ........</li>
+        <li>to ........</li>
+        <button id="start-button">Start</button>
+      </div>
+    </div>
+
+    <!-- Game Over Dialog with Play again button -->
+    <div id="game-over-dialog" class="modal">
+      <div class="modal-content">
+        <h1 class="modal-header">Game Over !</h1>
+        <p>Your point is ..... </p>
+        <p>Your time ... </p>
+        <button id="play-again-button">Play again</button>
+      </div>
+    </div>
+
+  </body>
 </html>

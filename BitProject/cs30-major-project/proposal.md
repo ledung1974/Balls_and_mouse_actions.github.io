@@ -3,16 +3,17 @@
 
 
 ## Needs to have list
-- using p5play library for physics
+- using p5play library for physics - done
 - start screen
-- two main sprites: the circle for player to control and the balloon
-- scrolling background
+- two main sprites: the circle as shield for player to control and the balloon - done 
+- scrolling background - done
 - background music
 - score checker
 - have at least 7 to 8 different type of obstacles (7 or 8 different ways of arranging the obstacles)
 - game over screen, display scores.
-- display the game nicely
+
 
 ## Nice to have list
 - local storage to keep track of player's best scores
 - let player play again when game over.
+- display the game nicely.
