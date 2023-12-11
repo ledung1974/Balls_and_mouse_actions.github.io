@@ -3,7 +3,7 @@ let theSky;
 let backgroundY1;
 let backgroundY2;
 let scrollSpeed = 2;
-let soundtrack;
+let soundtrack,hit;
 let bird;
 let balloons;
 let obstaclesArray = [];
@@ -14,6 +14,7 @@ let gameLevel = 1;
 function preload() {
   theSky = loadImage("assets/sky.jpg");
   soundtrack = loadSound("assets/soundtrack.mp3");
+  hit = loadSound("assets/hit.mp3");
 }
 
 function setup() {
@@ -156,6 +157,7 @@ function removeOffScreenObstaclesAndCheckCollision(groupObs, index) {
 function checkCollision(obstacle) {
   if (obstacle.collides(balloons)) {
     soundtrack.stop(0.01);
+    hit.play();
     gameStarted = false;
     balloons.img = "assets/boom.png";
     //Show GameOver Dialog
