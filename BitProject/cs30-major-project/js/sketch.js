@@ -19,6 +19,7 @@ function preload() {
 
 function setup() {
   new Canvas(windowWidth, windowHeight);
+  world.gravity.y = 2;//set gravity for game (p5play)
   backgroundY1 = 0;
   backgroundY2 = height;
 
@@ -65,8 +66,8 @@ function makeBalloons() {
   balloons = new Sprite();
   balloons.x = width / 2;
   balloons.y = height-150;
-  balloons.width = 140;
-  balloons.height = 275;
+  balloons.width = 100;
+  balloons.height = 200;
   balloons.img = "assets/balloons.png";
   balloons.collider = "static";
 }
@@ -87,6 +88,7 @@ function makeBird() {
 function makeGroupOfObstacles(amount, typeOfSprites) {
   groupObs = new Group();
   groupObs.y = 10;
+  groupObs.bounciness = 0.3;
   groupObs.moveTowards(balloons, gameLevel);
   while (groupObs.length < amount) {
     let obs = new groupObs.Sprite();
@@ -131,6 +133,7 @@ function makeGroupOfObstacles(amount, typeOfSprites) {
       obs.moveTowards(balloons, 0.01);
       obs.direction = -10;
       obs.speed = 10*obs.scale;
+      obs.bounciness = 2;
     }
   }
   obstaclesArray.push(groupObs);
@@ -155,13 +158,12 @@ function removeOffScreenObstaclesAndCheckCollision(groupObs, index) {
         //Check collision with the balloons
         break;
       }
-      if (
+      if (//Not remove when the obstacle above the screen 
         groupObs[i].position.x + groupObs[i].width / 2 < 0 ||
         groupObs[i].position.x - groupObs[i].width / 2 > width ||
-        groupObs[i].position.y + groupObs[i].height / 2 < 0 ||
         groupObs[i].position.y - groupObs[i].height / 2 > height
       ) {
-        //console.log("Removing obstacle at index:", i);
+        console.log("Removing obstacle at index:", i);
         groupObs[i].remove();
       }
     }
