@@ -106,6 +106,7 @@ function makeGroupOfObstacles(amount, typeOfSprites) {
       obs.x = width / 2;
       obs.y = random(0, 30);
       obs.rotationSpeed = 1;
+      obs.textSize = 24;
       obs.text = gameLevel;
     }
     if (typeOfSprites == "Pigs") {
@@ -153,7 +154,7 @@ function removeOffScreenObstaclesAndCheckCollision(groupObs, index) {
 //Process when there is a collision
 function checkCollision(obstacle) {
   if (obstacle.collides(balloons)) {
-    soundtrack.stop(1);
+    soundtrack.stop(0.01);
     gameStarted = false;
     balloons.img = "assets/boom.png";
     //Show GameOver Dialog
