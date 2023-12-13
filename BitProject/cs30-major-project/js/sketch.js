@@ -3,12 +3,31 @@ let theSky;
 let backgroundY1;
 let backgroundY2;
 let scrollSpeed = 2;
-let soundtrack,hit;
+let soundtrack, hit;
 let bird;
 let balloons;
 let obstaclesArray = [];
-let lastGemTime = 0;
 let gameLevel = 1;
+
+const arrTypeOfObstacles = [
+    {shape:"Squares",rotate:"slow"},
+    {shape:"Squares",rotate:"fast"},
+    {shape:"Dots",arrange:"random"},
+    {shape:"Dots",arrange:"center"},
+    {shape:"Rectangles",arrange:"vertical"},
+    {shape:"Rectangles",arrange:"horizontal"},
+    {shape:"Pigs",direction:"down"},
+    {shape:"Pigs",direction:"ballon"},
+];
+
+const arrDirections = [
+  { img: "assets/airplaneltor.png", direction: "right" },
+  { img: "assets/airplanertol.png", direction: "left" },
+];
+//Random pickup an item from an array
+function randomItemFromArray(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 // Default P5JS functions: preload, setup, draw ///////////////////////////////////
 function preload() {
@@ -19,7 +38,7 @@ function preload() {
 
 function setup() {
   new Canvas(windowWidth, windowHeight);
-  world.gravity.y = 2;//set gravity for game (p5play)
+  //world.gravity.y = 2; //set gravity for game (p5play)
   backgroundY1 = 0;
   backgroundY2 = height;
 
@@ -38,6 +57,9 @@ function setup() {
 function draw() {
   scrollingDownBackground();
   if (gameStarted) {
+    if (frameCount < 20000) {
+      gameLevel = Math.floor(1 + frameCount / 500); //increase the gameLevel
+    }
     bird.moveTowards(mouse);
     createGroupOfObstacles();
     obstaclesArray.forEach(scrollingObstacles);
@@ -65,7 +87,7 @@ function scrollingDownBackground() {
 function makeBalloons() {
   balloons = new Sprite();
   balloons.x = width / 2;
-  balloons.y = height-150;
+  balloons.y = height - 150;
   balloons.width = 100;
   balloons.height = 200;
   balloons.img = "assets/balloons.png";
@@ -84,56 +106,83 @@ function makeBird() {
 }
 
 ///Make a Group (p5play) of Obstacles (p5play Sprites) then push to obstaclesArray
-//typeOfSprites = "Squares" or "Dots" or "Rectangles" or "Pigs" or "Airplane"
+//typeOfSprites = "Squares" or "Dots" or "Rectangles" or "Pigs" or "Airplane" 
 function makeGroupOfObstacles(amount, typeOfSprites) {
   groupObs = new Group();
-  groupObs.y = 10;
-  groupObs.bounciness = 0.3;
-  groupObs.moveTowards(balloons, gameLevel);
+  groupObs.y = 0;
   while (groupObs.length < amount) {
     let obs = new groupObs.Sprite();
-    if (typeOfSprites == "Squares") {
+    if (typeOfSprites.shape == "Squares") {
       obs.width = random(20, 80);
       obs.height = obs.width;
-      obs.rotationSpeed = 5;
+      if (typeOfSprites.rotate == "slow"){
+        obs.rotationSpeed = 1;
+      }else{
+        obs.rotationSpeed = 30;//rotate=fast
+      }
       obs.x = random(0, width);
       obs.textSize = 18;
       obs.text = gameLevel;
     }
-    if (typeOfSprites == "Dots") {
+    if (typeOfSprites.shape == "Dots") {
       obs.diameter = random(20, 80);
-      obs.x = random(0, width);
-      obs.speed = 3;
-      obs.direction = random(0,180);
+      if (typeOfSprites.arrange == "random"){
+        obs.x = random(0, width);
+        obs.direction = random(0, 180);
+        obs.speed = 3;
+      }else{
+        obs.x = random(width/2-40,width/2+40);
+        obs.y = random(0, -40);
+        obs.rotationSpeed = 0;
+      }
       obs.textSize = 18;
       obs.text = gameLevel;
     }
-    if (typeOfSprites == "Rectangles") {
-      obs.width = random(20, 80);
-      obs.height = random(20, 80);
-      obs.x = width / 2;
-      obs.y = random(0, 30);
-      obs.rotationSpeed = 1;
+    if (typeOfSprites.shape == "Rectangles") {
+      if (typeOfSprites.arrange == "vertical"){
+        obs.width = random(100, 150);
+        obs.height = 30;
+        obs.x = width/2;
+        obs.y = 0-groupObs.length*30;
+        obs.rotate = 0;
+      }else{
+        obs.height = random(100, 150);
+        obs.width = 30;
+        obs.x  = groupObs.length*(width/amount);
+        obs.y = 0;
+        obs.rotationSpeed = 1;
+        obs.speed = 0.05;
+      }
       obs.textSize = 18;
       obs.text = gameLevel;
     }
-    if (typeOfSprites == "Pigs") {
-      obs.scale = random(0.3,1.1);
+    if (typeOfSprites.shape == "Pigs") {
+      obs.scale = random(0.3, 1.1);
       obs.img = "assets/pig.png";
-      obs.x = random(0, width);
-      obs.moveTowards(balloons, 0.01);
-      obs.speed = obs.scale;
+      if (typeOfSprites.direction == "ballon"){
+        obs.x  = groupObs.length*(width/amount);
+        obs.moveTowards(balloons, 0.1);
+        obs.speed = obs.scale;
+      }else{
+        obs.x = random(0, width);
+        obs.direction = "down";
+        obs.speed = 0.01;
+      }
     }
     if (typeOfSprites == "Airplane") {
-      obs.scale = random(0.5,1.1);
+      let dirObj = randomItemFromArray(arrDirections);
+      obs.img = dirObj.img;
+      obs.direction = dirObj.direction;
+      if (dirObj.direction == "left"){
+        obs.x = windowWidth;
+      }else{
+        obs.x = 0;
+      }      
+      obs.scale = random(0.5, 1.1);
       obs.collider = "kinematic";
-      obs.img = "assets/airplane.png";
-      obs.x = 0;
-      obs.y = random(5,height/3);
-      obs.moveTowards(balloons, 0.01);
-      obs.direction = -10;
-      obs.speed = 10*obs.scale;
-      obs.bounciness = 2;
+      obs.y = random(0, height / 4);
+      obs.speed = 10 * obs.scale;
+      obs.bounciness = 1.5;
     }
   }
   obstaclesArray.push(groupObs);
@@ -150,26 +199,27 @@ function scrollingObstacles(groupObs) {
 function removeOffScreenObstaclesAndCheckCollision(groupObs, index) {
   length = groupObs.length;
   if (length == 0) {
-    obstaclesArray.splice(index, 1);
-    //console.log("Removing group of obstacle at index:", index);
+    obstaclesArray.splice(index, 1);    
   } else {
     for (let i = length - 1; i >= 0; i--) {
       if (checkCollision(groupObs[i])) {
         //Check collision with the balloons
         break;
       }
-      if (//Not remove when the obstacle above the screen 
+      if (
+        //Not remove when the obstacle above the screen
         groupObs[i].position.x + groupObs[i].width / 2 < 0 ||
         groupObs[i].position.x - groupObs[i].width / 2 > width ||
         groupObs[i].position.y - groupObs[i].height / 2 > height
       ) {
-        console.log("Removing obstacle at index:", i);
+        //console.log("Removing obstacle at index:", i);
         groupObs[i].remove();
       }
     }
   }
 }
-//Process when there is a collision
+
+//Process when there is a collision --> GameOver
 function checkCollision(obstacle) {
   if (obstacle.collides(balloons)) {
     soundtrack.stop(0.01);
@@ -191,22 +241,14 @@ function checkCollision(obstacle) {
   }
 }
 
+//Create a group of obstacles after 299 frames
 function createGroupOfObstacles() {
-  if (frameCount - lastGemTime > 5 * 60) {
-    if (frameCount % 5 === 0) {
-      makeGroupOfObstacles(gameLevel * 2, "Squares");
-    } else if (frameCount % 5 === 1) {
-      makeGroupOfObstacles(gameLevel * 2, "Dots");
-    } else if (frameCount % 5 === 2) {
-      makeGroupOfObstacles(gameLevel * 2, "Rectangles");
-    } else if (frameCount % 5 === 3) {
-      makeGroupOfObstacles(gameLevel * 2, "Pigs");
+  if (frameCount % 299 == 0) {
+    if (frameCount % 5 == 0) {
+      makeGroupOfObstacles(1, "Airplane");//Random fly right to left or or vice versa
     } else {
-      makeGroupOfObstacles(1, "Airplane");
+      //Random create "Squares", "Rectangles", "Dots", "Pigs"
+      makeGroupOfObstacles(gameLevel * 2, randomItemFromArray(arrTypeOfObstacles));
     }
-    lastGemTime = frameCount;
-  }
-  if (frameCount < 20000) {
-    gameLevel = Math.floor(1 + frameCount / 500); //increase the gameLevel
   }
 }
