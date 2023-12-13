@@ -38,7 +38,7 @@ function preload() {
 
 function setup() {
   new Canvas(windowWidth, windowHeight);
-  //world.gravity.y = 2; //set gravity for game (p5play)
+  world.gravity.y = 0.05; //set gravity for game (p5play)
   backgroundY1 = 0;
   backgroundY2 = height;
 
@@ -148,9 +148,9 @@ function makeGroupOfObstacles(amount, typeOfSprites) {
       }else{
         obs.height = random(100, 150);
         obs.width = 30;
-        obs.x  = groupObs.length*(width/amount);
+        obs.x  = (groupObs.length-1)*(width/amount);
         obs.y = 0;
-        obs.rotationSpeed = 1;
+        obs.rotateTowards(mouse, 0.05, 0);
         obs.speed = 0.05;
       }
       obs.textSize = 18;
@@ -158,10 +158,11 @@ function makeGroupOfObstacles(amount, typeOfSprites) {
     }
     if (typeOfSprites.shape == "Pigs") {
       obs.scale = random(0.3, 1.1);
+      obs.y = random(0, -40);
       obs.img = "assets/pig.png";
       if (typeOfSprites.direction == "ballon"){
-        obs.x  = groupObs.length*(width/amount);
-        obs.moveTowards(balloons, 0.1);
+        obs.x  = (groupObs.length-1)*(width/amount);
+        obs.moveTowards(balloons, 0.3);
         obs.speed = obs.scale;
       }else{
         obs.x = random(0, width);
