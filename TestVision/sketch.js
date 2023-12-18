@@ -171,9 +171,9 @@ function setup() {
 
 function draw() {  
   if (gameStart){       
-   drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray,false);
-   touchEnable = true;
+    drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray,false);
     para1.html("Level: "+currentLevel);
+    touchEnable = true;
   }else{
     drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray,true);
     para1.html("Game over at level "+currentLevel);
