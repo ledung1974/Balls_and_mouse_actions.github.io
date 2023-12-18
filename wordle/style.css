@@ -13,15 +13,15 @@
 }
 
 body{
-    width: 100svw;
-    height: 100svh;
+    width: 100%;
+    height: 100%;
     background-color: white;
     touch-action: manipulation;
 }  
 
 h1 {
  text-align: center;
- font-size: 3svh;
+ font-size: 3vh;
  padding: 10px 5px;
 }
 
@@ -42,39 +42,39 @@ h1 {
 
 @media only screen and (max-width: 600px) {
   .letter-box {
-    height: 13svw;
-    width: 13svw;
+    height: 13vw;
+    width: 13vw;
   }
   .keyboard-button {
     width:8svw;
-    height:6.5svh;
+    height:6.5vh;
   }
   .modal-content {
-    width:svw;
-    margin:19svh auto;
+    width:vw;
+    margin:19vh auto;
   }
   .modal-result {
-    width:svw; 
-    margin:48svh auto;
+    width:vw; 
+    margin:48vh auto;
   }
 }
 
 @media only screen and (min-width: 600px) {
   .letter-box {
-    height:7svh;
-    width: 7svh;
+    height:7vh;
+    width: 7vh;
   }
   .keyboard-button {
-    width:3svw;
-    height:5svh;
+    width:3vw;
+    height:5vh;
   }
   .modal-content {
-    width:35svw;
-    margin:32svh auto;
+    width:35vw;
+    margin:32vh auto;
   }
   .modal-result {
-    width:35svw; 
-    margin:32svh auto;
+    width:35vw; 
+    margin:32vh auto;
   }
 }
 
