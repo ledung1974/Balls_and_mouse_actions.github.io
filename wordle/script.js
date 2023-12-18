@@ -98,7 +98,7 @@ function checkGuess() {
   if (guessString === rightGuessString) {
     guessesRemaining = 0;
     let headerResult = document.getElementById("modal-result-header");
-    headerResult.innerHTML="You done it! Congratulation!";
+    headerResult.innerHTML="Congratulation! You done it.";
     let wordResult = document.getElementById("word-result");
     wordResult.innerHTML= rightGuessString;
     let modal = document.getElementById("resultBox");

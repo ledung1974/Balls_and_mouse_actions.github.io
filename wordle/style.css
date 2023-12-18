@@ -13,15 +13,15 @@
 }
 
 body{
-  width: 100%;
-  background-color: white;
-  height: 100%;
-  touch-action: manipulation;
-}
+    width: 100svw;
+    height: 100svh;
+    background-color: white;
+    touch-action: manipulation;
+}  
 
 h1 {
  text-align: center;
- font-size: 1.6rem;
+ font-size: 3svh;
  padding: 10px 5px;
 }
 
@@ -37,7 +37,45 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 15px 5px;
+  padding: 10px 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .letter-box {
+    height: 13svw;
+    width: 13svw;
+  }
+  .keyboard-button {
+    width:8svw;
+    height:6.5svh;
+  }
+  .modal-content {
+    width:svw;
+    margin:19svh auto;
+  }
+  .modal-result {
+    width:svw; 
+    margin:48svh auto;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .letter-box {
+    height:7svh;
+    width: 7svh;
+  }
+  .keyboard-button {
+    width:3svw;
+    height:5svh;
+  }
+  .modal-content {
+    width:35svw;
+    margin:32svh auto;
+  }
+  .modal-result {
+    width:35svw; 
+    margin:32svh auto;
+  }
 }
 
 .letter-box {
@@ -45,8 +83,6 @@ h1 {
   margin: 2px;
   font-size: 2.4rem;
   font-weight: 500;
-  height: 3.8rem;
-  width: 3.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +99,7 @@ h1 {
 }
 
 #keyboard-container {
-  padding:10px 5px;
+  padding:5px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,7 +115,7 @@ h1 {
 
 .keyboard-button {
   font-size: 1.2rem;
-  width:2rem;
+  
   border-radius: 5px;
   border-width: 0px;
   font-weight: 500;
@@ -87,6 +123,7 @@ h1 {
   margin: 0 2px;
   cursor: pointer;
   text-transform: uppercase;
+  background-color: #d8d8d8;
 }
 #enter-button{
   font-size: 0.8rem;
@@ -109,9 +146,9 @@ h1 {
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  width: 100svw; 
+  height: 100svh; 
+  overflow: none; 
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -139,15 +176,12 @@ h1 {
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  margin-top:25rem;
+  background-color: #ffffff;
   padding:5px 20px;
-  border: 1px solid #888;
-  width:25rem;
+  border: 1px solid #888; 
 }
 .modal-content > p, li {
-  padding: 5px;
+  padding: 5px 0px;
 }
 
 .modal-alert{
@@ -169,12 +203,8 @@ h1 {
 
 .modal-result {
   background-color: #fefefe;
-  margin: auto;
-  margin-top:29rem;
-  padding:5px 20px;
+  padding:20px 20px;
   border: 1px solid #888;
-  width:25rem;
-  height:11rem;
 }
 #modal-result-header{
   text-align: center;
