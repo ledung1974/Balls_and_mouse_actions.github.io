@@ -53,6 +53,10 @@ h1 {
     width:vw;
     margin:19vh auto;
   }
+  .modal-alert{
+    width:vw;
+    margin:19vh auto;
+  }  
   .modal-result {
     width:vw; 
     margin:48vh auto;
@@ -72,6 +76,10 @@ h1 {
     width:35vw;
     margin:32vh auto;
   }
+  .modal-alert{
+    width:35vw;
+    margin:19vh auto;
+  }  
   .modal-result {
     width:35vw; 
     margin:32vh auto;
@@ -188,8 +196,7 @@ h1 {
   margin: auto;
   margin-top: 200px;
   padding:5px 10px;
-  border: 0px solid #efabab;
-  width:20rem;
+  border: 0px solid #efabab;  
 }
 
 .alert{
