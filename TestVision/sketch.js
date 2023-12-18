@@ -16,6 +16,7 @@ let currentArray = [];//2D array of the square items
 
 let gameStart = false;
 let clickEnable = false;
+let touchEnable = false;
 
 let currentColor0 = [];//Ramdom color for the square item
 let currentColor1 = [];//Different color for only one square item
@@ -121,7 +122,7 @@ function mouseClicked() {
 
 //When run on touch screen as Iphone
 function touchStarted() {      
-   if (gameStart){
+   if (gameStart & touchEnable){
       let pixelColor = get(mouseX, mouseY);
       if (JSON.stringify(pixelColor) === JSON.stringify(currentColor1.levels)){
             currentLevel += 1;
@@ -169,7 +170,9 @@ function setup() {
 
 function draw() {  
   if (gameStart){       
-    drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray,false);
+   touchEnable = false; 
+   drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray,false);
+   touchEnable = true;
     para1.html("Level: "+currentLevel);
   }else{
     drawBoard (margin,margin,canvasSize-2*margin,currentColor0,currentColor1,currentArray,true);
